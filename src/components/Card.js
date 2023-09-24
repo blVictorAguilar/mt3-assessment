@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaTrash, FaCheck } from "react-icons/fa";
+import "../styles/Card.css";
 export const Card = ({
   item,
   position,
@@ -22,6 +23,29 @@ export const Card = ({
     setIsDraggingOver(false);
   }
 
+  const ButtonsHeader = () => {
+    return (
+      <>
+        {item.status !== "Deleted" && (
+          <button
+            className="card-button-menu delete"
+            onClick={() => onUpdateTodoFn(id, "Deleted")}
+          >
+            <FaTrash />
+          </button>
+        )}
+        {item.status !== "Done" && (
+          <button
+            className="card-button-menu check"
+            onClick={() => onUpdateTodoFn(id, "Done")}
+          >
+            <FaCheck />
+          </button>
+        )}
+      </>
+    );
+  };
+
   return (
     <div
       onMouseEnter={() => setShowOptions(true)}
@@ -35,22 +59,7 @@ export const Card = ({
         setIsDraggingOver(false);
       }}
     >
-      {showOptions && (
-        <>
-          <button
-            className="card-button-menu delete"
-            onClick={() => onUpdateTodoFn(id, "Deleted")}
-          >
-            <FaTrash />
-          </button>
-          <button
-            className="card-button-menu check"
-            onClick={() => onUpdateTodoFn(id, "Completed")}
-          >
-            <FaCheck />
-          </button>
-        </>
-      )}
+      {showOptions && <ButtonsHeader />}
       <h3>Priority: {priority}</h3>
       <p>{text}</p>
       <p>Status: {status}</p>

@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import { Card } from "./Card";
 import { useAppContext } from "../context/AppContext";
+import "../styles/List.css";
 export const CardList = ({ data = [], handlePopUpFn }) => {
   const dragItem = useRef();
   const dragOverItem = useRef();

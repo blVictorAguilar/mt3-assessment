@@ -33,9 +33,12 @@ export const AppProvider = ({ children }) => {
   };
 
   const updatePendingTodo = (id, status) => {
-    const pendingTodo = pendingTodos.find((todo) => todo.id === id);
-    pendingTodo.status = status;
-    setPendingTodos((prevState) => [...prevState, pendingTodo]);
+    const updatedTodos = pendingTodos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, status };
+      }
+    });
+    setPendingTodos(updatedTodos);
   };
 
   const totalActiveTodos =

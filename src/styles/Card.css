@@ -1,0 +1,43 @@
+.card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    width: 180px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #333;
+    cursor: move;
+    height: 270px;
+    overflow-wrap: break-word;
+    position: relative;
+  }
+  
+  .card.hovered {
+    cursor: pointer;
+  }
+  
+  .card-button-menu {
+    position: absolute;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 10px;
+  }
+  .card-button-menu.check {
+    left: 10px;
+  }
+  .card-button-menu.delete {
+    right: 10px;
+  }
+  
+  .card.dragging {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  .card.drag-over {
+    background-color: #43ED3F;
+    color: white;
+  }
+ 

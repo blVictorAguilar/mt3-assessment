@@ -1,0 +1,38 @@
+.card-button {
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    width: 180px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    overflow: hidden;
+    height: 270px;
+  }
+  
+  .card-button:hover::before {
+    content: "ADD NEW";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    padding: 8px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .card-button:hover::before {
+    opacity: 1;
+  }
+  
+  .card-button:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }

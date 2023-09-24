@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { v4 as uuidv4 } from "uuid";
-
+import "../styles/Form.css";
 export const Form = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({});
   const { addPendingTodo, filterPendingTodos } = useAppContext();
@@ -10,9 +10,6 @@ export const Form = ({ isOpen, onClose }) => {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-    const isDataInvalid =
-      !formData.status || !formData.priority || !formData.text;
-    setDisableBtn(isDataInvalid);
   };
 
   const handleSubmit = (e) => {
@@ -22,6 +19,12 @@ export const Form = ({ isOpen, onClose }) => {
     filterPendingTodos();
     onClose();
   };
+
+  useEffect(() => {
+    const isDataInvalid =
+      !formData.status || !formData.priority || !formData.text;
+    setDisableBtn(isDataInvalid);
+  }, [formData]);
 
   if (!isOpen) return null;
 
