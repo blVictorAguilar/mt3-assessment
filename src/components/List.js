@@ -5,7 +5,8 @@ import { useAppContext } from "../context/AppContext";
 export const CardList = ({ data = [], handlePopUpFn }) => {
   const dragItem = useRef();
   const dragOverItem = useRef();
-  const { pendingTodos, updatePendingTodos } = useAppContext();
+  const { pendingTodos, updatePendingTodos, updatePendingTodo } =
+    useAppContext();
 
   const drop = () => {
     const pendingListCopy = [...pendingTodos];
@@ -15,6 +16,10 @@ export const CardList = ({ data = [], handlePopUpFn }) => {
     dragItem.current = null;
     dragOverItem.current = null;
     updatePendingTodos(pendingListCopy);
+  };
+
+  const handleUpdateTodo = (id, key) => {
+    updatePendingTodo(id, key);
   };
 
   return (
@@ -28,6 +33,7 @@ export const CardList = ({ data = [], handlePopUpFn }) => {
           dragItem={dragItem}
           dragOverItem={dragOverItem}
           onDragEndFn={drop}
+          onUpdateTodoFn={handleUpdateTodo}
         ></Card>
       ))}
     </>

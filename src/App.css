@@ -6,10 +6,30 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  color:#333;
+  color: #333;
   cursor: move;
   height: 270px;
   overflow-wrap: break-word;
+  position: relative;
+}
+
+.card.hovered {
+  cursor: pointer;
+}
+
+.card-button-menu {
+  position: absolute;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+.card-button-menu.check {
+  left: 10px;
+}
+.card-button-menu.delete {
+  right: 10px;
 }
 
 .card.dragging {
@@ -17,11 +37,11 @@
 }
 
 .card.drag-over {
-  background-color: #43ED3F; /* New background color when dragging over */
-  color: white; /* Text color when dragging over */
+  background-color: #43ED3F;
+  color: white;
 }
 .card-button {
-  position: relative; /* Add this line for positioning */
+  position: relative;
   border: 1px solid #ccc;
   padding: 16px;
   margin: 16px;
@@ -31,29 +51,28 @@
   background-color: #fff;
   color: #333;
   cursor: pointer;
-  overflow: hidden; 
+  overflow: hidden;
   height: 270px;
 }
 
 .card-button:hover::before {
-  content: "ADD NEW"; 
+  content: "ADD NEW";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #333; /* Text color */
+  color: #333;
   border: 2px solid #ccc;
   background-color: #fff;
   padding: 8px 8px;
   border-radius: 4px;
   font-size: 14px;
-  opacity: 0; /* Initially hidden */
+  opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  
 }
 
 .card-button:hover::before {
-  opacity: 1; /* Display the text on hover */
+  opacity: 1;
 }
 
 .card-button:hover {
@@ -76,11 +95,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-}
-
-.footer-element{
-  margin-right:auto;
-  padding-top:40px
 }
 
 .popup-overlay {
@@ -141,7 +155,9 @@
 .form-submit:hover {
   background-color: #36c92b;
 }
-
+.form-submit:disabled {
+  background-color: #ccc;
+}
 .form-cancel {
   color: #36c92b;
   padding: 10px 20px;
@@ -160,7 +176,7 @@
   background-color: #ccc;
 }
 
-.button-footer{
+.button-footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -181,13 +197,60 @@ select {
 }
 
 select:focus {
-  outline: none; 
-  border-color: #43ED3F; 
-  box-shadow: 0 0 5px rgba(67, 237, 63, 0.5); 
+  outline: none;
+  border-color: #43ED3F;
+  box-shadow: 0 0 5px rgba(67, 237, 63, 0.5);
 }
 
-.header{
+.header {
   text-align: center;
-  color: #333; 
-  padding-top: 20px;
+  color: #333;
+  padding-top: 10px;
+  border-bottom: #333;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+}
+
+/* CSS for the menu container */
+.menu-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* CSS for the floating menu */
+.floating-menu {
+  position: absolute;
+  top: 100%;
+  right: 10;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 999;
+  width: 200px;
+}
+
+/* Style for the menu options */
+.options-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.options-menu li {
+  margin: 5px 0;
+  cursor: pointer;
+}
+.options-menu li:hover {
+  background-color: #e0e0e0;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer-element {
+  margin: 20px 20px;
 }

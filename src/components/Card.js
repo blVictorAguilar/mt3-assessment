@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-
+import { FaTrash, FaCheck } from "react-icons/fa";
 export const Card = ({
   item,
   position,
   dragItem,
   dragOverItem,
   onDragEndFn,
+  onUpdateTodoFn,
 }) => {
-  const { priority, text, status } = item;
+  const { priority, text, status, id } = item;
   const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
 
   function handleDragEnter() {
     dragOverItem.current = position;
-    console.log("entered");
     setIsDraggingOver(true);
   }
 
@@ -23,6 +24,8 @@ export const Card = ({
 
   return (
     <div
+      onMouseEnter={() => setShowOptions(true)}
+      onMouseLeave={() => setShowOptions(false)}
       className={`card ${isDraggingOver ? "drag-over" : ""}`}
       draggable
       onDragStart={() => (dragItem.current = position)}
@@ -32,6 +35,22 @@ export const Card = ({
         setIsDraggingOver(false);
       }}
     >
+      {showOptions && (
+        <>
+          <button
+            className="card-button-menu delete"
+            onClick={() => onUpdateTodoFn(id, "Deleted")}
+          >
+            <FaTrash />
+          </button>
+          <button
+            className="card-button-menu check"
+            onClick={() => onUpdateTodoFn(id, "Completed")}
+          >
+            <FaCheck />
+          </button>
+        </>
+      )}
       <h3>Priority: {priority}</h3>
       <p>{text}</p>
       <p>Status: {status}</p>

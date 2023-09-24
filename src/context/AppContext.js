@@ -12,6 +12,7 @@ export const useAppContext = () => {
 
 export const AppProvider = ({ children }) => {
   const [pendingTodos, setPendingTodos] = useState([]);
+  const [filteredTodos, setFilteredTodos] = useState([]);
 
   const addPendingTodo = (todo) => {
     setPendingTodos((prevState) => [...prevState, todo]);
@@ -25,11 +26,38 @@ export const AppProvider = ({ children }) => {
   const updatePendingTodos = (todos) => {
     setPendingTodos(todos);
   };
+
+  const filterPendingTodos = (key = "Active") => {
+    const filteredData = pendingTodos.filter((todo) => todo.status === key);
+    setFilteredTodos(filteredData);
+  };
+
+  const updatePendingTodo = (id, status) => {
+    const pendingTodo = pendingTodos.find((todo) => todo.id === id);
+    pendingTodo.status = status;
+    setPendingTodos((prevState) => [...prevState, pendingTodo]);
+  };
+
+  const totalActiveTodos =
+    pendingTodos.filter((todo) => todo.status === "Active").length || 0;
+
+  const totalCompletedTodos =
+    pendingTodos.filter((todo) => todo.status === "Done").length || 0;
+
+  const totalDeletedTodos =
+    pendingTodos.filter((todo) => todo.status === "Deleted").length || 0;
+
   const contextValue = {
     pendingTodos,
     addPendingTodo,
     removePendingTodo,
     updatePendingTodos,
+    filteredTodos,
+    filterPendingTodos,
+    totalActiveTodos,
+    totalCompletedTodos,
+    totalDeletedTodos,
+    updatePendingTodo,
   };
 
   return (

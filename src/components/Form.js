@@ -4,20 +4,22 @@ import { v4 as uuidv4 } from "uuid";
 
 export const Form = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({});
-  const { addPendingTodo } = useAppContext();
+  const { addPendingTodo, filterPendingTodos } = useAppContext();
+  const [disableBtn, setDisableBtn] = useState(true);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    console.log("name: ", name);
-    console.log("value: ", value);
-
     setFormData((prevState) => ({ ...prevState, [name]: value }));
+    const isDataInvalid =
+      !formData.status || !formData.priority || !formData.text;
+    setDisableBtn(isDataInvalid);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addPendingTodo({ ...formData, id: uuidv4() });
     setFormData({});
+    filterPendingTodos();
     onClose();
   };
 
@@ -61,7 +63,7 @@ export const Form = ({ isOpen, onClose }) => {
             <option value="Deleted">Deleted</option>
           </select>
           <div className="button-footer">
-            <button className="form-submit" type="submit">
+            <button className="form-submit" type="submit" disabled={disableBtn}>
               Submit
             </button>
             <button className="form-cancel" type="button" onClick={onClose}>
