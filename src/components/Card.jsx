@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaTrash, FaCheck } from "react-icons/fa";
 import "../styles/Card.css";
+import { Todo } from "./classes/Todo";
 export const Card = ({
   item,
   position,
@@ -9,7 +10,7 @@ export const Card = ({
   onDragEndFn,
   onUpdateTodoFn,
 }) => {
-  const { priority, text, status, id } = item;
+  const todo = new Todo(item);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -26,18 +27,18 @@ export const Card = ({
   const ButtonsHeader = () => {
     return (
       <>
-        {item.status !== "Deleted" && (
+        {todo.isDeleted && (
           <button
             className="card-button-menu delete"
-            onClick={() => onUpdateTodoFn(id, "Deleted")}
+            onClick={() => onUpdateTodoFn(todo.id, "Deleted")}
           >
             <FaTrash />
           </button>
         )}
-        {item.status !== "Done" && (
+        {todo.isCompleted && (
           <button
             className="card-button-menu check"
-            onClick={() => onUpdateTodoFn(id, "Done")}
+            onClick={() => onUpdateTodoFn(todo.id, "Done")}
           >
             <FaCheck />
           </button>
@@ -60,9 +61,9 @@ export const Card = ({
       }}
     >
       {showOptions && <ButtonsHeader />}
-      <h3>Priority: {priority}</h3>
-      <p>{text}</p>
-      <p>Status: {status}</p>
+      <h3>Priority: {todo.priority}</h3>
+      <p>{todo.text}</p>
+      <p>Status: {todo.status}</p>
     </div>
   );
 };

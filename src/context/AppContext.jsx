@@ -33,22 +33,23 @@ export const AppProvider = ({ children }) => {
   };
 
   const updatePendingTodo = (id, status) => {
-    const updatedTodos = pendingTodos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, status };
-      }
-    });
+    const updatedTodos = pendingTodos.map((todo) => ({
+      ...todo,
+      status: todo.id === id ? status : todo.status,
+    }));
     setPendingTodos(updatedTodos);
   };
 
-  const totalActiveTodos =
-    pendingTodos.filter((todo) => todo.status === "Active").length || 0;
+  const filterTodoByStatus = (status) => {
+    if (!pendingTodos) {
+      return 0;
+    }
+    return pendingTodos.filter((todo) => todo.status === status).length;
+  };
 
-  const totalCompletedTodos =
-    pendingTodos.filter((todo) => todo.status === "Done").length || 0;
-
-  const totalDeletedTodos =
-    pendingTodos.filter((todo) => todo.status === "Deleted").length || 0;
+  const totalActiveTodos = filterTodoByStatus("Active");
+  const totalCompletedTodos = filterTodoByStatus("Done");
+  const totalDeletedTodos = filterTodoByStatus("Deleted");
 
   const contextValue = {
     pendingTodos,
